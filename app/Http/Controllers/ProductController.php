@@ -16,15 +16,25 @@ class ProductController extends Controller
      */
     public function index()
     { 
+        
          $product=Product::all();
-        //return new ProductCollection::collection(Product::all());
+       // return new ProductCollection($product);
+       /**
+        * for getting that we need to first change the
+        * extends type to Json 
+        */
+        return ProductCollection::collection($product);
        
-        return new ProdouctResource($product);
+        //return  ProdouctResource::collection($product);
         // return response()->json(['message'=>'Product Data is here ','data'=>$product],200);
         // return [
         //     'id'=>1,
         //     'name'=>'Product',
         // ];
+
+//         return response()->json([
+// $product->id,$product->name,
+//         ]);
     }
 
     /**
