@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProdouctResource;
 
 class ProductController extends Controller
 {
@@ -13,8 +15,16 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    { 
+         $product=Product::all();
+        //return new ProductCollection::collection(Product::all());
+       
+        return new ProdouctResource($product);
+        // return response()->json(['message'=>'Product Data is here ','data'=>$product],200);
+        // return [
+        //     'id'=>1,
+        //     'name'=>'Product',
+        // ];
     }
 
     /**
@@ -44,9 +54,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $product=Product::find($id);
+        return new ProdouctResource($product);
     }
 
     /**
