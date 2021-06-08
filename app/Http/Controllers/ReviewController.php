@@ -18,11 +18,12 @@ class ReviewController extends Controller
     {
 $product=Product::find($id);
 
-//$review=Review::where('product_id','=',$product->id)->get();
+// $review=Review::where('product_id','=',$product->id)->get();
 // foreach($review as $item){
 //     return response()->json( [
-//         'id'=>$item->id,
-//         'product_name'=>$item->products->name,
+//         'id'=>$item['id'],
+       
+        
 //     ]);
 // }
 
