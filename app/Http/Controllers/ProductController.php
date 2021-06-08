@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProdouctResource;
 use App\Http\Requests\ProductRequest;
+use Illuminate\Http\Client\Response;
 
 class ProductController extends Controller
 {
@@ -113,7 +114,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->all());
+        return response([
+'data'=>new ProdouctResource($product)
+        ],200);
     }
 
     /**
