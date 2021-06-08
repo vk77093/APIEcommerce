@@ -18,7 +18,11 @@ class ProductController extends Controller
     { 
         
          $product=Product::all();
+         /**
+          * When Getting the extends with collection
+          */
        // return new ProductCollection($product);
+       
        /**
         * for getting that we need to first change the
         * extends type to Json 

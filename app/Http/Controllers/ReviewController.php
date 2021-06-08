@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Review;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Http\Resources\ReviewResource;
 
 class ReviewController extends Controller
 {
@@ -12,9 +14,21 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+$product=Product::find($id);
+
+//$review=Review::where('product_id','=',$product->id)->get();
+// foreach($review as $item){
+//     return response()->json( [
+//         'id'=>$item->id,
+//         'product_name'=>$item->products->name,
+//     ]);
+// }
+
+//dd($review);
+        //return response()->json($review);
+        return new ReviewResource($product->reviews);
     }
 
     /**

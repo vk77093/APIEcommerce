@@ -2,9 +2,11 @@
 
 namespace App\Http\Resources;
 
+//use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductCollection extends JsonResource
+//class ProductCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -24,6 +26,12 @@ class ProductCollection extends JsonResource
 'link' =>route('product.show',$this->id),
 ],
          ]);
+// return [
+//     // 'data' => $this->collection,
+//     // for getting the Resource with collection
+//      'data' => ProdouctResource::collection($this->collection),
+//     'meta' => ['song_count' => $this->collection->count()],
+// ];
          
        
     }
