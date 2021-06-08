@@ -6,9 +6,19 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProdouctResource;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
+
+    /**
+     * making Constructor for validation
+     * of the authorization
+     */
+    public function __construct(){
+        $this->middleware('auth:api')
+         ->except('index','show');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -57,9 +67,18 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $product=Product::create([
+            'name' =>$request->name,
+            'description' =>$request->description,
+            'price' =>$request->price,
+            'stock' =>$request->stock,
+            'discount' =>$request->discount,
+
+        ]);
+        $product->save();
+        return response(new ProdouctResource($product),200);
     }
 
     /**
