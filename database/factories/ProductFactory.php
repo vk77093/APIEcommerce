@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 class ProductFactory extends Factory
 {
@@ -27,6 +28,9 @@ class ProductFactory extends Factory
             'price'=>$this->faker->numberBetween(100,300),
             'stock'=>$this->faker->numberBetween(1,12),
             'discount' =>$this->faker->numberBetween(0,8),
+            'user_id'=>function(){
+                return User::all()->random();
+            }
         ];
     }
 }

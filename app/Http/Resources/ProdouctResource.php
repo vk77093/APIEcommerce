@@ -23,6 +23,7 @@ class ProdouctResource extends JsonResource
             'stock'=>$this->stock ==0 ? 'Out of stock':$this->stock,
             'discount'=>$this->discount,
             'totalPrice'=>round((1-($this->discount/100))*$this->price,2),
+            'user_id'=>$this->user_id,
             'href'=>[
                 'reviews'=>route('review.index',$this->id)
             ],
