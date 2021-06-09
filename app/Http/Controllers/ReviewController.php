@@ -48,9 +48,24 @@ $product=Product::find($id);
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
-        //
+        //  $review=new Review($request->all());
+        // $product->reviews()->save($review);
+        //  return new ReviewResource($review);
+        $product=Product::find($id);
+        $product_id=$product->id;
+        //return response()->json($product_id);
+        //dd($product_id);
+        $review=Review::create([
+            'product_id' =>$product_id,
+            'cust_name'=>$request->cust_name,
+            'cust_review' =>$request->cust_review,
+            'star'=>$request->star,
+        ]);
+        
+        $review->save();
+        return new ReviewResource($product->reviews);
     }
 
     /**
@@ -61,7 +76,7 @@ $product=Product::find($id);
      */
     public function show(Review $review)
     {
-        //
+        return $review;
     }
 
     /**
@@ -84,7 +99,7 @@ $product=Product::find($id);
      */
     public function update(Request $request, Review $review)
     {
-        //
+        
     }
 
     /**
