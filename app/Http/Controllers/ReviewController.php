@@ -74,9 +74,19 @@ $product=Product::find($id);
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function show(Review $review)
+    public function show($id,$revId)
     {
-        return $review;
+        $productId=Product::find($id);
+        $reviewId=Review::find($revId);
+        //dd($reviewId->id,$productId->id);
+        // $getReview=Review::where($reviewId->id,'AND',$productId->id)->get();
+$getReview=Review::where(
+    'id','=',$reviewId->id,'AND','product_id','=',$productId->id)
+   ->get();
+    
+
+        return response()->json($getReview);
+        
     }
 
     /**
@@ -97,9 +107,18 @@ $product=Product::find($id);
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Review $review)
+    public function update(Request $request,$id,$revId )
+    
     {
+        $productId=Product::find($id);
+        $reviewID=Review::find($revId);
+
+        //dd($review);
+        // return $product;
+      $reviewID->update($request->all());
         
+        return response()->json(['message'=>'data updated','data'=>$reviewID],200);
+       
     }
 
     /**
@@ -108,8 +127,10 @@ $product=Product::find($id);
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
+    public function destroy($id,$revId )
     {
-        //
+        $review=Review::find($revId);
+        $review->delete();
+        return response()->json('Data got deleted');
     }
 }
